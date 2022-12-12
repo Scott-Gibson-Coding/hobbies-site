@@ -7,12 +7,12 @@ import {
 const Navbar = () => {
     return (
         <div>
-            <nav class='navbar is-link'>
-                <div class='navbar-brand'>
-                    <Link class='navbar-item' to='/'>
+            <nav className='navbar is-link'>
+                <div className='navbar-brand'>
+                    <Link className='navbar-item' to='/'>
                         Home
                     </Link>
-                    <Link class='navbar-item' to='/cubetimer'>
+                    <Link className='navbar-item' to='/cubetimer'>
                         Cube Timer
                     </Link>
                 </div>
