@@ -8,7 +8,9 @@ import {
     Home,
     Navbar
 } from './components';
+import 'bulma/css/bulma.css'; // import bulma styling into project
 
+// Router logic for the site. Import page components from components/ directory.
 const App = () => {
     return (
         <Router>

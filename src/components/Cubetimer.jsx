@@ -1,7 +1,8 @@
+// Cubetimer page
 const Cubetimer = () => {
     return (
-        <div>
-            <h2>Cubetimer Page</h2>
+        <div class='container pl-5 pt-4'>
+            <h1 class='title'>Cube Timer Page</h1>
         </div>
     );
 }

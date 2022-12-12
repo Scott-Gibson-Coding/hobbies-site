@@ -6,7 +6,7 @@ to implement various tools that will help me improve my
 hobbies and daily life.
 
 The frontend of the site will be built off of React and 
-Bulma/Tailwind.
+Bulma/Bootstrap.
 
 The backend will be built with Flask.
 

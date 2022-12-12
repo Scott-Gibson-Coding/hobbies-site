@@ -1,7 +1,8 @@
+// Home page
 const Home = () => {
     return (
-        <div>
-            <h2>Home Page</h2>
+        <div class='container pl-5 pt-4'>
+            <h1 class='title'>Home Page</h1>
         </div>
     );
 }

@@ -3,23 +3,20 @@ import {
     Outlet
 } from 'react-router-dom';
 
-function Navbar() {
+// Navigation panel for each page in the project.
+const Navbar = () => {
     return (
         <div>
-            {/* A "layout route" is a good place to put markup you want to
-            share across all the pages on your site, like navigation. */}
-            <nav>
-                <ul>
-                    <li>
-                        <Link to="/">Home</Link>
-                    </li>
-                    <li>
-                        <Link to="/cubetimer">Cube Timer</Link>
-                    </li>
-                </ul>
+            <nav class='navbar is-link'>
+                <div class='navbar-brand'>
+                    <Link class='navbar-item' to='/'>
+                        Home
+                    </Link>
+                    <Link class='navbar-item' to='/cubetimer'>
+                        Cube Timer
+                    </Link>
+                </div>
             </nav>
-
-            <hr />
 
             <Outlet />
         </div>
