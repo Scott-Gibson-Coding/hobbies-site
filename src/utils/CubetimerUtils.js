@@ -6,5 +6,5 @@ export const formatTime = (time) => {
     let secs = time % 60;
     let mins = Math.floor(time / 60);
 
-    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}.${mills.toString().padStart(3, '0')}`;
+    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}.${Math.round(mills).toString().padStart(3, '0')}`;
 }

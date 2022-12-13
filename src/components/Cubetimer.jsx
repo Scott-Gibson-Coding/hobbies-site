@@ -7,6 +7,12 @@ const Cubetimer = () => {
     const [avg, setAvg] = useState(NaN);
     const [times, setTimes] = useState([]);
 
+    useEffect(() => {
+        if (times.length > 0) {
+            setAvg(times.reduce((a, b) => a + b, 0) / times.length);
+        }
+    }, [times])
+
     const addTime = (newTime) => {
         setTimes([...times, newTime]);
     }
@@ -16,7 +22,7 @@ const Cubetimer = () => {
             <h1 className='title is-1'>Cube Timer Page</h1>
             <Timer onTimeStop={addTime} />
             <h2 className='subtitle is-5'>
-                {avg ? avg.toFixed(3) : avg.toString()}
+                Average: {avg ? formatTime(avg) : avg.toString()}
             </h2>
 
             <hr></hr>
