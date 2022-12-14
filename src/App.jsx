@@ -6,7 +6,8 @@ import {
 import {
     Cubetimer,
     Home,
-    Navbar
+    Navbar,
+    Tasks
 } from './components';
 import 'bulma/css/bulma.css'; // import bulma styling into project
 
@@ -18,6 +19,7 @@ const App = () => {
                 <Route path='/' element={<Navbar />}>
                     <Route index element={<Home />} />
                     <Route path='cubetimer' element={<Cubetimer />} />
+                    <Route path='tasks' element={<Tasks />} />
                 </Route>
             </Routes>
         </Router>

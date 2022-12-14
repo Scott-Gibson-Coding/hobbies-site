@@ -15,6 +15,9 @@ const Navbar = () => {
                     <Link className='navbar-item' to='/cubetimer'>
                         Cube Timer
                     </Link>
+                    <Link className='navbar-item' to='/tasks'>
+                        Tasks
+                    </Link>
                 </div>
             </nav>
 
