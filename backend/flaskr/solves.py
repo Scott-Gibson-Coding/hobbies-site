@@ -38,3 +38,10 @@ def create():
     )
     db.commit()
     return 'Solve create successful'
+
+@solves_bp.route('/api/solves-delete/<int:id>', methods=['POST'])
+def delete(id):
+    db = get_db()
+    db.execute('DELETE FROM solve WHERE id = ?', (id,))
+    db.commit()
+    return 'Solve delete successful'

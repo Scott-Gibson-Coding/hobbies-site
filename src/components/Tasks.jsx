@@ -25,7 +25,6 @@ const Tasks = () => {
             title: title,
             body: body
         }).then((response) => {
-            console.log(response);
             // refresh contents of page
             setRefresh((refresh) => !refresh);
         }).catch((error) => {
@@ -36,12 +35,11 @@ const Tasks = () => {
     const handleDelete = (id) => {
         const url = `/api/tasks-delete/${id}`;
         axios.post(url).then((response) => {
-            console.log(response);
             // refresh contents of page
             setRefresh((refresh) => !refresh);
         }).catch((error) => {
             console.log(error);
-        })
+        });
     }
 
     return (

@@ -8,3 +8,7 @@ export const formatTime = (time) => {
 
     return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}.${Math.round(mills).toString().padStart(3, '0')}`;
 }
+
+export const getScramble = () => {
+    return 'TODO: Scrambling alg';
+}
