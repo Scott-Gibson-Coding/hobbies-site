@@ -26,7 +26,9 @@ def create_app(test_config=None):
     from . import db
     db.init_app(app)
 
-    from . import tasks
+    # register blueprints
+    from . import tasks, solves
     app.register_blueprint(tasks.tasks_bp)
+    app.register_blueprint(solves.solves_bp)
 
     return app

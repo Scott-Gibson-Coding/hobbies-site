@@ -10,7 +10,7 @@ const Tasks = () => {
 
     // on rendering the page, fetch the tasks from the db
     useEffect(() => {
-        const url = '/api/task-getall';
+        const url = '/api/tasks-getall';
         axios.get(url).then((response) => {
             let data = response.data;
             setTasks(data['tasks']);
@@ -20,7 +20,7 @@ const Tasks = () => {
     }, [refresh]);
 
     const handleCreate = () => {
-        const url = '/api/task-create';
+        const url = '/api/tasks-create';
         axios.post(url, {
             title: title,
             body: body
@@ -34,7 +34,7 @@ const Tasks = () => {
     }
 
     const handleDelete = (id) => {
-        const url = `/api/task-delete/${id}`;
+        const url = `/api/tasks-delete/${id}`;
         axios.post(url).then((response) => {
             console.log(response);
             // refresh contents of page
