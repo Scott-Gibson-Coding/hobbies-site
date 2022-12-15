@@ -6,7 +6,7 @@ from flaskr.db import get_db
 
 tasks_bp = Blueprint('tasks', __name__)
 
-@tasks_bp.route('/api/tasks')
+@tasks_bp.route('/api/task-getall')
 def tasks():
     db = get_db()
     tasks = db.execute(
@@ -26,8 +26,8 @@ def tasks():
     }
     return data, 200
 
-@tasks_bp.route('/api/tasks/create', methods=['POST'])
-def tasks_create():
+@tasks_bp.route('/api/task-create', methods=['POST'])
+def create():
     # get the data required to create a new task
     data = request.json
     # ensure the entries exist
@@ -45,3 +45,10 @@ def tasks_create():
     )
     db.commit()
     return 'Creation successful', 200
+
+@tasks_bp.route('/api/task-delete/<int:id>', methods=['POST'])
+def delete(id):
+    db = get_db()
+    db.execute('DELETE FROM task WHERE id = ?', (id,))
+    db.commit()
+    return 'Delete Successful'
