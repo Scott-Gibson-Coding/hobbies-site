@@ -9,7 +9,7 @@ import {
     Navbar,
     Tasks
 } from './components';
-import 'bulma/css/bulma.css'; // import bulma styling into project
+import './styles/css/mystyles.css'; // import custom styling into project
 
 // Router logic for the site. Import page components from components/ directory.
 const App = () => {

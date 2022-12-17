@@ -67,6 +67,7 @@ const Cubetimer = () => {
             {times.map(({ id, solve_time }) => (
                 <div key={id} className='block my-2'>
                     <span>{formatTime(solve_time)}</span>
+                    <button className='bulma-delete-mixin'></button>
                     <span><button className='button is-small ml-3 is-danger'
                         onClick={() => handleDelete(id)}>
                         Delete
