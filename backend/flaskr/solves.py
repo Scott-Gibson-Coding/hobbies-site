@@ -37,7 +37,20 @@ def create():
         (solve_time,)
     )
     db.commit()
-    return 'Solve create successful'
+
+    new_id = db.execute(
+        'SELECT id '
+        'FROM solve '
+        'WHERE solve_time = (?) '
+        'ORDER BY id DESC',
+        (solve_time,)
+    ).fetchone()['id']
+
+    response = {
+        'message': 'Solve create successful',
+        'new_id': new_id
+    }
+    return response
 
 @solves_bp.route('/api/solves-delete/<int:id>', methods=['POST'])
 def delete(id):

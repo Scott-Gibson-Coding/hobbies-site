@@ -7,9 +7,8 @@ import axios from 'axios';
 const Cubetimer = () => {
     const [avg, setAvg] = useState(0);
     const [times, setTimes] = useState([]);
-    const [refresh, setRefresh] = useState(false);
 
-    // fetch data from solve db on page load and refresh
+    // fetch data from solve db on page load
     useEffect(() => {
         const url = 'api/solves-getall';
         axios.get(url).then((response) => {
@@ -17,8 +16,9 @@ const Cubetimer = () => {
         }).catch((error) => {
             console.log(error);
         });
-    }, [refresh])
+    }, [])
 
+    // each time the times array is updated, calculate the average
     useEffect(() => {
         if (times.length > 0) {
             let sum = 0;
@@ -30,22 +30,28 @@ const Cubetimer = () => {
     }, [times])
 
     const addTime = (newTime) => {
+        // DEBUG: I'm unsure why this works, but setting the times array
+        //        twice doesn't add two elements, but it makes the set on
+        //        screen considerably faster than waiting for the db to return
+        //        an id. So we set it to -1 first, then update it when the db
+        //        finishes creating a new time.
+        setTimes([{ 'id': -1, 'solve_time': newTime }, ...times])
         // call create api to add a new time to the db
         const url = 'api/solves-create';
         axios.post(url, {
             time: newTime
-        }).then(() => {
-            setRefresh((refresh) => !refresh);
+        }).then((response) => {
+            let newId = response.data['new_id'];
+            setTimes([{ 'id': newId, 'solve_time': newTime }, ...times])
         }).catch((error) => {
             console.log(error);
         });
     }
 
-    const handleDelete = (id) => {
-        const url = `/api/solves-delete/${id}`;
-        axios.post(url).then((response) => {
-            setRefresh((refresh) => !refresh);
-        }).catch((error) => {
+    const handleDelete = (idToDelete) => {
+        setTimes(times.filter(({ id }) => id != idToDelete));
+        const url = `/api/solves-delete/${idToDelete}`;
+        axios.post(url).catch((error) => {
             console.log(error);
         });
     }
@@ -64,7 +70,7 @@ const Cubetimer = () => {
 
             <hr></hr>
 
-            <div class='column is-2'>
+            <div className='column is-2'>
                 {times.map(({ id, solve_time }) => (
                     <div key={id} className='block level'>
                         <span className='level-item'>{formatTime(solve_time)}</span>
