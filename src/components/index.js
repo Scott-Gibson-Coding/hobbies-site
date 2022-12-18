@@ -1,11 +1,9 @@
-import Cubetimer from './Cubetimer';
-import Home from './Home';
 import Navbar from './Navbar';
-import Tasks from './Tasks';
+import Timer from './Timer';
+import Table from './Table';
 
 export {
-    Cubetimer,
-    Home,
     Navbar,
-    Tasks
+    Timer,
+    Table
 };

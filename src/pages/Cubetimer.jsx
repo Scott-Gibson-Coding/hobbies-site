@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import Timer from './Timer';
+import { Timer, Table } from '../components';
 import { formatTime, getScramble } from '../utils/CubetimerUtils';
 import axios from 'axios';
 
@@ -52,37 +52,25 @@ const Cubetimer = () => {
         });
     }
 
-    const handleDelete = (idToDelete) => {
-        setTimes(times.filter(({ id }) => id != idToDelete));
-        const url = `/api/solves-delete/${idToDelete}`;
-        axios.post(url).catch((error) => {
-            console.log(error);
-        });
-    }
-
     return (
         <div className='container pl-5 pt-4'>
-            <h2 className='subtitle is-4'>{scramble}</h2>
-            <h1 className='title is-1'>Cube Timer Page</h1>
-            <Timer onTimeStop={addTime} />
-            <h2 className='subtitle is-5'>
-                Solves: {times.length}
-            </h2>
-            <h2 className='subtitle is-5'>
-                Average: {formatTime(avg)}
-            </h2>
-
-            <hr></hr>
-
-            <div className='column is-2'>
-                {times.map(({ id, solve_time }) => (
-                    <div key={id} className='block level'>
-                        <span className='level-item'>{formatTime(solve_time)}</span>
-                        <button className='bulma-delete-mixin is-small level-item'
-                            onClick={() => handleDelete(id)}></button>
-                    </div>
-                ))}
+            <div className='columns'>
+                <div className='column is-8'>
+                    <h2 className='subtitle is-4'>{scramble}</h2>
+                    <h1 className='title is-1'>Cube Timer Page</h1>
+                    <Timer onTimeStop={addTime} />
+                    <h2 className='subtitle is-5'>
+                        Solves: {times.length}
+                    </h2>
+                    <h2 className='subtitle is-5'>
+                        Average: {formatTime(avg)}
+                    </h2>
+                </div>
+                <div className='column is-4'>
+                    <Table times={times} />
+                </div>
             </div>
+            <hr></hr>
         </div>
     );
 }

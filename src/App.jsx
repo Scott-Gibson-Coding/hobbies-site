@@ -3,12 +3,12 @@ import {
     Routes,
     Route
 } from 'react-router-dom';
+import { Navbar } from './components';
 import {
     Cubetimer,
     Home,
-    Navbar,
     Tasks
-} from './components';
+} from './pages';
 import './styles/css/mystyles.css'; // import custom styling into project
 
 // Router logic for the site. Import page components from components/ directory.
