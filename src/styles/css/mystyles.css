@@ -7942,3 +7942,10 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
     min-height: 32px;
     min-width: 32px;
     width: 32px; }
+
+.bulma-unselectable-mixin {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }

@@ -6,3 +6,7 @@
 .bulma-delete-mixin {
     @include delete;
 }
+
+.bulma-unselectable-mixin {
+    @include unselectable;
+}

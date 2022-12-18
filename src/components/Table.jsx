@@ -1,21 +1,13 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import { formatTime } from '../utils/CubetimerUtils';
 
-const Table = ({ times }) => {
+const Table = ({ times, onDelete }) => {
     const [tableTimes, setTableTimes] = useState([]);
 
     useEffect(() => {
         setTableTimes(times)
     }, [times]);
 
-    const handleDelete = (idToDelete) => {
-        setTableTimes((tableTimes) => tableTimes.filter(({ id }) => id !== idToDelete));
-        const url = `/api/solves-delete/${idToDelete}`;
-        axios.post(url).catch((error) => {
-            console.log(error);
-        });
-    }
     return (
         <div>
             <table className='table is-bordered'>
@@ -36,7 +28,7 @@ const Table = ({ times }) => {
                                         {formatTime(solve_time)}
                                     </div>
                                     <button className='bulma-delete-mixin is-small level-item ml-2'
-                                        onClick={() => handleDelete(id)}></button>
+                                        onClick={() => onDelete(id)}></button>
                                 </div>
                             </td>
                         </tr>

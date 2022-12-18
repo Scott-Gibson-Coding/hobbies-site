@@ -52,6 +52,14 @@ const Cubetimer = () => {
         });
     }
 
+    const removeTime = (idToDelete) => {
+        setTimes((times) => times.filter(({ id }) => id !== idToDelete));
+        const url = `/api/solves-delete/${idToDelete}`;
+        axios.post(url).catch((error) => {
+            console.log(error);
+        });
+    }
+
     return (
         <div className='container pl-5 pt-4'>
             <div className='columns'>
@@ -67,7 +75,7 @@ const Cubetimer = () => {
                     </h2>
                 </div>
                 <div className='column is-4'>
-                    <Table times={times} />
+                    <Table times={times} onDelete={removeTime} />
                 </div>
             </div>
             <hr></hr>

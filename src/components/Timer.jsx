@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { formatTime } from '../utils/CubetimerUtils';
 
 // Timer component
-const Timer = (props) => {
+const Timer = ({ onTimeStop }) => {
     const timer = useRef(null);
     const [running, setRunning] = useState(false);
     const [total, setTotal] = useState(0);
@@ -63,7 +63,7 @@ const Timer = (props) => {
     // assume this to be a false start and don't return anything.
     useEffect(() => {
         if (total > 0) {
-            props.onTimeStop(total);
+            onTimeStop(total); // callback function
         }
     }, [total])
 
@@ -79,12 +79,10 @@ const Timer = (props) => {
     }
 
     return (
-        <div className='columns is-vcentered is-mobile'>
-            <div className='column is-narrow'>
-                <h1 className='title is-1 bulma-unselectable-mixin'>
-                    {running ? formatTime(endTime - startTime) : formatTime(total)}
-                </h1>
-            </div>
+        <div className='block'>
+            <p className='title is-1 bulma-unselectable-mixin'>
+                {running ? formatTime(endTime - startTime) : formatTime(total)}
+            </p>
         </div>
     );
 }
