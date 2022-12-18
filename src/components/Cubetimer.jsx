@@ -7,9 +7,12 @@ import axios from 'axios';
 const Cubetimer = () => {
     const [avg, setAvg] = useState(0);
     const [times, setTimes] = useState([]);
+    const [scramble, setScramble] = useState('');
 
     // fetch data from solve db on page load
     useEffect(() => {
+        setScramble(getScramble());
+
         const url = 'api/solves-getall';
         axios.get(url).then((response) => {
             setTimes(() => response.data)
@@ -36,6 +39,7 @@ const Cubetimer = () => {
         //        an id. So we set it to -1 first, then update it when the db
         //        finishes creating a new time.
         setTimes([{ 'id': -1, 'solve_time': newTime }, ...times])
+        setScramble(getScramble());
         // call create api to add a new time to the db
         const url = 'api/solves-create';
         axios.post(url, {
@@ -58,7 +62,7 @@ const Cubetimer = () => {
 
     return (
         <div className='container pl-5 pt-4'>
-            <h2 className='subtitle is-4'>{getScramble()}</h2>
+            <h2 className='subtitle is-4'>{scramble}</h2>
             <h1 className='title is-1'>Cube Timer Page</h1>
             <Timer onTimeStop={addTime} />
             <h2 className='subtitle is-5'>
