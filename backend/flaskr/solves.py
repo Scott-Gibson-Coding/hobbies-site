@@ -58,3 +58,10 @@ def delete(id):
     db.execute('DELETE FROM solve WHERE id = ?', (id,))
     db.commit()
     return 'Solve delete successful'
+
+@solves_bp.route('/api/solves-deleteall', methods=['POST'])
+def deleteall():
+    db = get_db()
+    db.execute('DELETE FROM solve')
+    db.commit()
+    return 'Solve delete all successful'

@@ -60,6 +60,12 @@ const Cubetimer = () => {
         });
     }
 
+    const handleRestart = () => {
+        setTimes([]);
+        const url = '/api/solves-deleteall';
+        axios.post(url).catch((error) => { console.log(error) });
+    }
+
     return (
         <div className='container pl-5 pt-4'>
             <div className='columns'>
@@ -73,6 +79,10 @@ const Cubetimer = () => {
                     <h2 className='subtitle is-5'>
                         Average: {formatTime(avg)}
                     </h2>
+                    <button className='button is-info'
+                        onClick={handleRestart}>
+                        Restart Session
+                    </button>
                 </div>
                 <div className='column is-4'>
                     <Table times={times} onDelete={removeTime} />

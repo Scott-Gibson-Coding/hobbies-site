@@ -80,9 +80,9 @@ const Timer = ({ onTimeStop }) => {
 
     return (
         <div className='block'>
-            <p className='title is-1 bulma-unselectable-mixin'>
+            <h1 className='title is-1 bulma-unselectable-mixin'>
                 {running ? formatTime(endTime - startTime) : formatTime(total)}
-            </p>
+            </h1>
         </div>
     );
 }
