@@ -41,9 +41,7 @@ def create():
     new_id = db.execute(
         'SELECT id '
         'FROM solve '
-        'WHERE solve_time = (?) '
-        'ORDER BY id DESC',
-        (solve_time,)
+        'ORDER BY id DESC'
     ).fetchone()['id']
 
     response = {

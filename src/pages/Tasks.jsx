@@ -1,12 +1,10 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Task, TaskForm } from '../components';
 
 // Tasks page
 const Tasks = () => {
     const [tasks, setTasks] = useState([]);
-    const [refresh, setRefresh] = useState(false); // DEBUG: inefficient, use to refresh contents of page
-    const [title, setTitle] = useState('Temp title');
-    const [body, setBody] = useState('Sample body text');
 
     // on rendering the page, fetch the tasks from the db
     useEffect(() => {
@@ -17,57 +15,46 @@ const Tasks = () => {
         }).catch((error) => {
             console.log(error);
         });
-    }, [refresh]);
+    }, []);
 
-    const handleCreate = () => {
+    const onCreateCallback = (description) => {
+        // call create form api
         const url = '/api/tasks-create';
         axios.post(url, {
-            title: title,
-            body: body
+            description: description,
         }).then((response) => {
-            // refresh contents of page
-            setRefresh((refresh) => !refresh);
+            let new_id = response.data['new_id'];
+            setTasks((tasks) => [{ id: new_id, description: description }, ...tasks]);
         }).catch((error) => {
             console.log(error);
         });
     }
 
-    const handleDelete = (id) => {
-        const url = `/api/tasks-delete/${id}`;
-        axios.post(url).then((response) => {
-            // refresh contents of page
-            setRefresh((refresh) => !refresh);
-        }).catch((error) => {
+    const onDeleteCallback = (idToDelete) => {
+        setTasks((tasks) => tasks.filter(({ id }) => id !== idToDelete));
+        const url = `/api/tasks-delete/${idToDelete}`;
+        axios.post(url).catch((error) => {
             console.log(error);
         });
     }
 
     return (
-        <div className='container pl-5 pt-4'>
-            <h1 className='title'>Tasks Page</h1>
-            <div className='column is-6'>
-                <button className='block button is-success is-large is-fullwidth'
-                    onClick={handleCreate}>
-                    Create Task
-                </button>
-                {tasks.map((task) => (
-                    <nav className='block' key={task.id}>
-                        <nav className='level'>
-                            <div className='level-item'>
-                                <h1 className='title is-4' >{task.title}</h1>
-                            </div>
-                            <div className='level-item'>
-                                <button className='button is-danger'
-                                    onClick={() => handleDelete(task.id)}>
-                                    Delete
-                                </button>
-                            </div>
-                        </nav>
-                        <h1 className='subtitle is-6'>{task.body}</h1>
-                    </nav>
+        <div>
+            <div className='section py-3'>
+                <h1 className='title'>
+                    Tasks Page
+                </h1>
+                <TaskForm taskFormCallback={onCreateCallback} />
+            </div>
+            <hr></hr>
+            <div className='section py-3'>
+                {tasks.map(({ id, description }) => (
+                    <Task key={id} id={id} description={description}
+                        deleteTaskCallback={onDeleteCallback} />
                 ))}
             </div>
         </div>
+
     );
 }
 

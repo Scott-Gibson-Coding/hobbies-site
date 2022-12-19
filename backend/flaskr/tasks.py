@@ -18,8 +18,7 @@ def getall():
     data = {
         'tasks': [{
             'id': task['id'],
-            'title': task['title'],
-            'body': task['body'],
+            'description': task['description'],
             'created': task['created']
         } for task in tasks]
     }
@@ -31,19 +30,29 @@ def create():
     data = request.json
     # ensure the entries exist
     try:
-        title = data['title']
-        body = data['body']
+        description = data['description']
     except:
-        return 'Error: title and body must be non-empty!', 400
+        return 'Error: description must be included in POST request!', 400
 
     db = get_db()
     db.execute(
-        'INSERT INTO task (title, body) '
-        'VALUES (?, ?)',
-        (title, body)
+        'INSERT INTO task (description) '
+        'VALUES (?)',
+        (description,)
     )
     db.commit()
-    return 'Task create successful', 200
+
+    new_id = db.execute(
+        'SELECT id '
+        'FROM task '
+        'ORDER BY id DESC'
+    ).fetchone()['id']
+
+    response = {
+        'message': 'Task create successful',
+        'new_id': new_id
+    }
+    return response, 200
 
 @tasks_bp.route('/api/tasks-delete/<int:id>', methods=['POST'])
 def delete(id):
