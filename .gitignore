@@ -5,6 +5,9 @@
 /.pnp
 .pnp.js
 
+# css styling built from bulma
+/src/styles/mystyles.css
+
 # testing
 /coverage
 

@@ -9,7 +9,7 @@ import {
     Home,
     Tasks
 } from './pages';
-import './styles/css/mystyles.css'; // import custom styling into project
+import './styles/mystyles.css'; // import custom styling into project
 
 // Router logic for the site. Import page components from components/ directory.
 const App = () => {

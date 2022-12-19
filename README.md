@@ -12,9 +12,21 @@ The backend will be built with Flask.
 
 ---
 
-### Ideas for Pages I'd like to make:
+### Usage
+
+Build the css file by running 'npm run css-build'
+
+---
+
+### Pages In Progress
 
 - Cube Timer Page
+- Tasks Page
+
+---
+
+### Ideas for Pages I'd like to make:
+
 - Daily Planner Page
 - Hobby Stats Tracker Page
 - Weekly/Monthly Schedule Page
