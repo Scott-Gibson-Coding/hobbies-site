@@ -1,9 +1,9 @@
-import Cubetimer from './Cubetimer';
-import Home from './Home';
-import Tasks from './Tasks';
+import CubetimerPage from './CubetimerPage';
+import HomePage from './HomePage';
+import TasksPage from './TasksPage';
 
 export {
-    Cubetimer,
-    Home,
-    Tasks
+    CubetimerPage,
+    HomePage,
+    TasksPage
 };

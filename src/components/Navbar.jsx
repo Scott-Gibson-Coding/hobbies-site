@@ -1,9 +1,16 @@
+/*
+ * Author: Scott Gibson
+ * Date:       12/19/22
+ */
+
 import {
     Link,
     Outlet
 } from 'react-router-dom';
 
-// Navigation panel for each page in the project.
+/*
+ * Navbar Component
+ */
 const Navbar = () => {
     return (
         <div>
